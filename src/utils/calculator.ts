@@ -1,6 +1,6 @@
 interface StoreItem {
   initial: number;
-  operation: "addition" | "division";
+  operation: "addition" | "division" | "subtraction" | "multiplication";
   result: number;
 }
 
@@ -24,10 +24,28 @@ export class Calculator {
     });
   }
 
+  clear() {
+    this.value = 0;
+  }
+
   add(n: number) {
     const initial = this.value;
     this.value = this.trim(this.value + n);
     this.addToStore(initial, "addition", this.value);
+    return this.value;
+  }
+
+  multiply(n: number) {
+    const initial = this.value;
+    this.value = this.trim(this.value * n);
+    this.addToStore(initial, "multiplication", this.value);
+    return this.value;
+  }
+
+  subtract(n: number) {
+    const initial = this.value;
+    this.value = this.trim(this.value - n);
+    this.addToStore(initial, "subtraction", this.value);
     return this.value;
   }
 
